@@ -1,0 +1,189 @@
+.todo-item {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  border-radius: 1rem;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.todo-item + .todo-item {
+  margin-top: 1rem;
+}
+
+/* checkbox */
+.ui.checkbox.checkbox-item {
+  flex: 0.8;
+}
+.ui.checkbox.checkbox-item label {
+  color: #444444;
+}
+.ui.checkbox.checkbox-item label::before {
+  border-color: #b1b2b3;
+  border-width: 2px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+.ui.checkbox label:after {
+  font-size: 0.786em;
+}
+
+/*checkbox hide */
+.ui.checkbox.checkbox-item.hide {
+  display: none;
+}
+
+/* checkbox hover */
+.ui.checkbox.checkbox-item:hover label {
+  color: rgba(68, 68, 68, 0.5);
+  text-decoration: line-through;
+}
+.ui.checkbox label:hover::before {
+  border-color: #d4d4d5;
+}
+/* checked */
+.ui.checkbox.checkbox-item.checked label {
+  color: rgba(68, 68, 68, 0.5);
+  text-decoration: line-through;
+}
+.ui.checkbox.checkbox-item input:focus ~ label:before {
+  background-color: #fff;
+  border-color: #d4d4d5;
+}
+.ui.checkbox.checkbox-item input:checked:focus ~ label:before,
+.ui.checkbox.checkbox-item
+  input:not([type='radio']):indeterminate:focus
+  ~ label:before {
+  background-color: #fd746c;
+  border-color: #fd746c;
+}
+.ui.checkbox.checkbox-item input:checked ~ label:before {
+  background-color: #fd746c;
+  border-color: #fd746c;
+}
+.ui.checkbox.checkbox-item input:checked ~ label:after {
+  color: #fff;
+}
+.ui.checkbox.checkbox-item input:checked:focus ~ label:after {
+  color: #fff;
+}
+.ui.checkbox.checkbox-item input:focus ~ label:after {
+  color: #fff;
+}
+
+/* time text */
+.todo-item .meta {
+  margin-right: 2rem;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* buttons */
+.todo-item .ui.buttons > div {
+  position: relative;
+}
+
+/* more 버튼 */
+.todo-item .ui.button.more-btn {
+  background: none;
+  box-shadow: none !important;
+}
+.todo-item .ui.button.more-btn:hover,
+.todo-item .ui.button.more-btn:focus,
+.todo-item .ui.button.more-btn:active {
+  background: none;
+  box-shadow: none !important;
+}
+
+/* delete 버튼 */
+.todo-item .ui.button.del-btn {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+  -webkit-transform: scale(0) translateX(0%);
+  -moz-transform: scale(0) translateX(0%);
+  -ms-transform: scale(0) translateX(0%);
+  -o-transform: scale(0) translateX(0%);
+  transform: scale(0) translateX(0%);
+  opacity: 0;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.todo-item .ui.button.del-btn.shown {
+  -webkit-transform: scale(1) translateX(-120%);
+  -moz-transform: scale(1) translateX(-120%);
+  -ms-transform: scale(1) translateX(-120%);
+  -o-transform: scale(1) translateX(-120%);
+  transform: scale(1) translateX(-120%);
+  opacity: 1;
+}
+
+/* edit 버튼 */
+.todo-item .ui.button.edit-btn {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+  -webkit-transform: scale(0) translateY(0%);
+  -moz-transform: scale(0) translateY(0%);
+  -ms-transform: scale(0) translateY(0%);
+  -o-transform: scale(0) translateY(0%);
+  transform: scale(0) translateY(0%);
+  opacity: 0;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.todo-item .ui.button.edit-btn.shown {
+  -webkit-transform: scale(1) translateY(-120%);
+  -moz-transform: scale(1) translateY(-120%);
+  -ms-transform: scale(1) translateY(-120%);
+  -o-transform: scale(1) translateY(-120%);
+  transform: scale(1) translateY(-120%);
+  opacity: 1;
+}
+
+/* edit input */
+.ui.input.edit-input {
+  position: absolute;
+  min-width: 70%;
+}
+.ui.input.edit-input.hide {
+  z-index: -1;
+  opacity: 0;
+}
+
+.ui.segment.todolist .todo-item .ui.input.edit-input > input {
+  background: rgba(222, 210, 229, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.15);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}

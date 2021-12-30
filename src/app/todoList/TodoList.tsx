@@ -1,8 +1,16 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
-import { Container, Grid, Input, Segment } from 'semantic-ui-react';
+import {
+  Container,
+  Grid,
+  Header,
+  Segment,
+} from 'semantic-ui-react';
+import { observer } from 'mobx-react';
+import { TodoListStore } from '~/app/service';
 import TodoItem from './TodoItem';
-
-import './todo.css';
+import TodoForm from './TodoForm';
+import '~/app/style/todo.css';
 
 interface ItemType {
   index: number;
@@ -10,22 +18,22 @@ interface ItemType {
   checked: boolean;
 }
 
-interface State {
-  itemList: Array<ItemType>;
-  title: string;
-}
-
+@observer
 class TodoList extends Component {
-  state: State = {
-    itemList: [
-      { index: 1, title: '리액트 공부하기', checked: false },
-      { index: 2, title: '복습하기', checked: false },
-    ],
-    title: '',
-  };
+  componentDidMount() {
+    TodoListStore.loadItem();
+
+    console.log('first rendered');
+  }
+
+  componentDidUpdate() {
+    TodoListStore.saveItem();
+
+    console.log('item updated');
+  }
 
   getCurrentDay = () => {
-    var dateObj = new Date();
+    const dateObj = new Date();
 
     const dayNames = [
       'Monday',
@@ -36,18 +44,17 @@ class TodoList extends Component {
       'Saturday',
       'Sunday',
     ];
-    var day = dayNames[dateObj.getDay() - 1];
+    const day = dayNames[dateObj.getDay() - 1];
 
     return day;
   };
 
   getCurrentDate = () => {
-    var dateObj = new Date();
-    var date = dateObj.getDate().toString();
-    var value =
-      date[date.length - 1] === '1'
-        ? 'st'
-        : date[date.length - 1] === '2'
+    const dateObj = new Date();
+    const date = dateObj.getDate().toString();
+    const value = date[date.length - 1] === '1'
+      ? 'st'
+      : date[date.length - 1] === '2'
         ? 'nd'
         : 'th';
 
@@ -55,7 +62,7 @@ class TodoList extends Component {
   };
 
   getCurrentMonth = () => {
-    var dateObj = new Date();
+    const dateObj = new Date();
 
     const monthNames = [
       'January',
@@ -71,104 +78,59 @@ class TodoList extends Component {
       'November',
       'December',
     ];
-    var month = monthNames[dateObj.getMonth()];
+    const month = monthNames[dateObj.getMonth()];
 
     return month;
   };
 
-  addItem = () => {
-    const { itemList, title } = this.state;
-
-    // console.log('Item added');
-
-    this.setState({
-      itemList: itemList.concat({
-        index:
-          itemList.length > 0 ? itemList[itemList.length - 1].index + 1 : 1,
-        title,
-        checked: false,
-      }),
-      title: '',
-    });
-  };
-
-  handleKeyPress = (e: any) => {
-    if (e.key === 'Enter') {
-      this.addItem();
-    }
-  };
-
-  deleteItem = (index: number) => {
-    const { itemList } = this.state;
-
-    console.log('Item deleted');
-
-    this.setState({
-      itemList: itemList.filter((item: ItemType) => item.index !== index),
-    });
-  };
-
   render() {
-    const { itemList, title } = this.state;
+    const { itemList } = TodoListStore;
 
     return (
       <>
         <Container>
-          <Segment.Group raised>
+          <Segment.Group>
+            <Segment className="todolist-header" padded>
+              <Header textAlign="center" size="huge" inverted>
+                Todo List
+              </Header>
+            </Segment>
             <Segment
-              className="todolist-header"
+              className="todolist-info"
               textAlign="center"
               size="massive"
               padded
             >
               <Grid>
                 <Grid.Row>
-                  <Grid.Column width={10} textAlign="left">
+                  <Grid.Column width={ 10 } textAlign="left">
                     <div>
-                      <div className="day">{this.getCurrentDay()}</div>
-                      <div className="date">{this.getCurrentDate()}</div>
+                      <div className="day">{ this.getCurrentDay() }</div>
+                      <div className="date">{ this.getCurrentDate() }</div>
                     </div>
                     <div>
-                      <div className="month">{this.getCurrentMonth()}</div>
+                      <div className="month">{ this.getCurrentMonth() }</div>
                     </div>
                   </Grid.Column>
-                  <Grid.Column floated="right" width={6} textAlign="right">
+                  <Grid.Column floated="right" width={ 6 } textAlign="right">
                     <div className="tasks">
-                      <span className="task-cnt">{itemList.length}</span> Tasks
+                      <span className="task-cnt">{ itemList.length }</span> Tasks
                     </div>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
             </Segment>
-            <Segment className="todolist-form">
-              <Input
-                fluid
-                value={title}
-                onChange={(e: any) => this.setState({ title: e.target.value })}
-                onKeyPress={this.handleKeyPress}
-                action={{
-                  content: 'Add',
-                  onClick: this.addItem,
-                }}
-                placeholder="뭐할까?"
-              />
-            </Segment>
+            <TodoForm />
             <Segment className="todolist">
-              {itemList.length > 0 ? (
-                itemList.map((data: ItemType) => (
-                  <TodoItem
-                    key={data.index}
-                    index={data.index}
-                    title={data.title}
-                    checked={data.checked}
-                    deleteItem={this.deleteItem}
-                  />
+              { itemList.length > 0 ? (
+                itemList.map((data: ItemType, index: number) => (
+                  <TodoItem key={ data.index } index={ index } />
                 ))
               ) : (
                 <div className="no-data">
                   <span>아직 할일을 등록하지 않았어요 ◡̈</span>
                 </div>
-              )}
+              ) }
             </Segment>
           </Segment.Group>
         </Container>
