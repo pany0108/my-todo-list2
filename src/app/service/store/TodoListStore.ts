@@ -48,17 +48,8 @@ class TodoListStore {
   @action
   loadItem = () => {
     const result = window.localStorage.getItem('arr');
-    // console.log(result);
-
-    // console.log(toJS(this.itemList));
-
     if (result !== null) {
-      console.log(result);
-      console.log(JSON.parse(result!));
-      // console.log('item loaded from localstorage');
-
       this.itemList = JSON.parse(result!);
-      // debugger;
     }
   }
 
@@ -67,9 +58,6 @@ class TodoListStore {
     const result = this.itemList;
 
     window.localStorage.setItem('arr', JSON.stringify(result));
-
-    // console.log(result.slice());
-    // console.log(result);
   }
 
   @action

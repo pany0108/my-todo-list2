@@ -31,7 +31,6 @@ class TimeSet extends Component {
             renderInput={ (params: any) => <TextField { ...params } /> }
           />
         </LocalizationProvider>
-
       </>
     );
   }

@@ -71,7 +71,7 @@
 }
 
 /* 시간 설정 */
-.ui.segment.todolist-form .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+.ui.segment.todolist-form .MuiInputBase-root {
   color: #444 !important;
   font-size: 1em;
   font-family: 'Fira Sans Extra Condensed', 'Noto Sans KR', sans-serif;
@@ -82,16 +82,14 @@
   -o-border-radius: 500rem;
   border-radius: 500rem;
 }
-.ui.segment.todolist-form
-  .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused {
+.ui.segment.todolist-form .MuiInputBase-root.Mui-focused {
   box-shadow: 0 2px 10px 0 rgba(31, 38, 135, 0.25);
 }
-.ui.segment.todolist-form
-  .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+.ui.segment.todolist-form .MuiInputBase-input {
   height: auto;
   padding: 1.3rem 4rem 1.3rem 2rem;
 }
-.ui.segment.todolist-form .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+.ui.segment.todolist-form .MuiOutlinedInput-notchedOutline {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   -webkit-border-radius: 500rem;
@@ -101,16 +99,15 @@
   border-radius: 500rem;
   box-shadow: 0 2px 10px 0 rgba(31, 38, 135, 0.05);
 }
-.ui.segment.todolist-form
-  .css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root:hover {
+.ui.segment.todolist-form .MuiIconButton-root:hover {
   background: transparent;
 }
-.ui.segment.todolist-form .css-i4bv87-MuiSvgIcon-root path {
+.ui.segment.todolist-form .MuiSvgIcon-root path {
   color: #fff;
 }
 
 /* clock popup */
-#Wrap ~ .css-1ozefeb .css-1smlk3z-MuiPaper-root {
+#Wrap ~ div .MuiPaper-root {
   background: rgba(255, 255, 255, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.18);
   -webkit-border-radius: 0.5rem;
@@ -122,21 +119,18 @@
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
-#Wrap ~ .css-1ozefeb .css-12ha4i7,
-#Wrap ~ .css-1ozefeb .css-7lip4c,
-#Wrap ~ .css-1ozefeb .css-a1rc6s {
+#Wrap ~ div .MuiClockPicker-arrowSwitcher ~ div > div > div:nth-child(2),
+#Wrap ~ div .MuiClockPicker-arrowSwitcher ~ div > div > div:nth-child(3) {
   background-color: #fd746c;
 }
-#Wrap ~ .css-1ozefeb .css-118whkv,
-#Wrap ~ .css-1ozefeb .css-2ujp1m {
+#Wrap ~ div .MuiClockPicker-arrowSwitcher ~ div > div > div:nth-child(3) > div {
   background-color: #fd746c;
   border-color: #fd746c;
 }
-#Wrap ~ .css-1ozefeb .css-1s220mh-MuiButtonBase-root-MuiIconButton-root,
-#Wrap ~ .css-1ozefeb .css-92nr1f-MuiButtonBase-root-MuiIconButton-root {
+#Wrap ~ div .MuiClockPicker-arrowSwitcher ~ div > .MuiButtonBase-root {
   background-color: #fd746c;
 }
-#Wrap ~ .css-1ozefeb .css-18puooo {
+#Wrap ~ div .css-18puooo {
   width: 5px;
 }
 /* fd746c  */

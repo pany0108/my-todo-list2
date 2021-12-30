@@ -23,13 +23,13 @@ class TodoList extends Component {
   componentDidMount() {
     TodoListStore.loadItem();
 
-    console.log('first rendered');
+    // console.log('first rendered');
   }
 
   componentDidUpdate() {
     TodoListStore.saveItem();
 
-    console.log('item updated');
+    // console.log('item updated');
   }
 
   getCurrentDay = () => {
