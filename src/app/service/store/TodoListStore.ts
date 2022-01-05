@@ -4,6 +4,7 @@ import moment from 'moment';
 
 interface ItemType {
   index: number;
+  id: number;
   title: string;
   checked: boolean;
   date: any;
@@ -62,6 +63,7 @@ class TodoListStore {
   @action
   loadItem = () => {
     const result = window.localStorage.getItem('arr');
+
     if (result !== null) {
       this.itemList = JSON.parse(result!);
     }
@@ -78,6 +80,7 @@ class TodoListStore {
   addItem = (index: number) => {
     const result = this.itemList.concat({
       index,
+      id: index,
       title: this.title,
       checked: false,
       date: this.date,

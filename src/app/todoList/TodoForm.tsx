@@ -9,6 +9,8 @@ import {
 } from '~/app/todoList';
 import '~/app/style/todoForm.css';
 
+interface Props{}
+
 interface State {
   modalOpenNoContents: boolean;
   modalOpenSetDate: boolean;
@@ -16,11 +18,19 @@ interface State {
 }
 
 @observer
-class TodoForm extends Component {
+class TodoForm extends Component<Props> {
+  private readonly todoInputRef: React.RefObject<any>;
+
   state:State = {
     modalOpenNoContents: false,
     modalOpenSetDate: false,
     modalOpenSetTime: false,
+  }
+
+  constructor(props: Props) {
+    super(props);
+
+    this.todoInputRef = React.createRef();
   }
 
   /**
@@ -118,6 +128,7 @@ class TodoForm extends Component {
                   circular
                   onClick={ () => {
                     this.addItem();
+                    this.todoInputRef.current.focus();
                   } }
                   style={ { padding: '1.4rem 2rem', marginLeft: 'auto' } }
                 >

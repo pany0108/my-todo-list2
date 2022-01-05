@@ -44,6 +44,9 @@ class TodoItem extends Component<Props> {
   }
 
   componentDidUpdate() {
+    TodoListStore.saveItem();
+
+    // console.log('item updated');
   }
 
   componentWillUnmount() {
@@ -56,7 +59,7 @@ class TodoItem extends Component<Props> {
   checkItem = () => {
     const { index } = this.props;
 
-    TodoListStore.checkItem(TodoListStore.itemList[index].index - 1);
+    TodoListStore.checkItem(index);
 
     // console.log('Item checked');
   };
