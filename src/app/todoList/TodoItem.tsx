@@ -50,32 +50,47 @@ class TodoItem extends Component<Props> {
     document.removeEventListener('mousedown', this.initMoreBtn);
   }
 
+  /**
+   * Item Check
+   */
   checkItem = () => {
     const { index } = this.props;
 
-    TodoListStore.checkItem(TodoListStore.itemList[index].index);
+    TodoListStore.checkItem(TodoListStore.itemList[index].index - 1);
 
     // console.log('Item checked');
   };
 
+  /**
+   * Item Edit
+   */
   editItem = () => {
     this.setState({ isEditBtnClicked: false });
 
     // console.log('item edited');
   };
 
+  /**
+   * Item Edit: Key = Enter
+   */
   handleEditKeyPress = (e: any) => {
     if (e.key === 'Enter') {
       this.editItem();
     }
   };
 
+  /**
+   * Item Delete
+   */
   deleteItem = () => {
     const { index } = this.props;
 
     TodoListStore.deleteItem(TodoListStore.itemList[index].index);
   };
 
+  /**
+   * Initialize More Button
+   */
   initMoreBtn = (event: any) => {
     if (!this.moreRef.current.contains(event.target)) {
       this.setState({ isMoreBtnClicked: false });

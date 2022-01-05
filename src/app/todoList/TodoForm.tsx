@@ -4,10 +4,10 @@ import {
 } from 'semantic-ui-react';
 import { observer } from 'mobx-react';
 import { TodoListStore } from '~/app/service';
-import { ModalNoContents, ModalNoDate } from './modal';
-import NativePicker from './NativePicker';
+import {
+  NativePicker, ModalNoTime, ModalNoContents, ModalNoDate,
+} from '~/app/todoList';
 import '~/app/style/todoForm.css';
-import ModalNoTime from './modal/ModalNoTime';
 
 interface State {
   modalOpenNoContents: boolean;
@@ -23,6 +23,9 @@ class TodoForm extends Component {
     modalOpenSetTime: false,
   }
 
+  /**
+   * Add Item to the List
+   */
   addItem = () => {
     const index = TodoListStore.itemList.length > 0 ? TodoListStore.itemList[TodoListStore.itemList.length - 1].index + 1 : 1;
 
@@ -52,12 +55,18 @@ class TodoForm extends Component {
     // console.log('Item added');
   };
 
+  /**
+   * Add Item to the List: Key=Enter
+   */
   handleKeyPress = (e: any) => {
     if (e.key === 'Enter') {
       this.addItem();
     }
   };
 
+  /**
+   * Reset Title Input
+   */
   resetInput = () => {
     TodoListStore.title = '';
   };

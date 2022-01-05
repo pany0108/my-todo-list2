@@ -7,9 +7,9 @@ import {
   Segment,
 } from 'semantic-ui-react';
 import { observer } from 'mobx-react';
+import moment from 'moment';
 import { TodoListStore } from '~/app/service';
-import TodoItem from './TodoItem';
-import TodoForm from './TodoForm';
+import { TodoItem, TodoForm } from '~/app/todoList';
 import '~/app/style/todo.css';
 
 interface ItemType {
@@ -32,8 +32,12 @@ class TodoList extends Component {
     // console.log('item updated');
   }
 
+  /**
+   * Get Day Names
+   * (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)
+   */
   getCurrentDay = () => {
-    const dateObj = new Date();
+    const dateObj = moment();
 
     const dayNames = [
       'Monday',
@@ -44,14 +48,17 @@ class TodoList extends Component {
       'Saturday',
       'Sunday',
     ];
-    const day = dayNames[dateObj.getDay() - 1];
+    const day = dayNames[dateObj.day() - 1];
 
     return day;
   };
 
+  /**
+   * Get Current Date
+   */
   getCurrentDate = () => {
-    const dateObj = new Date();
-    const date = dateObj.getDate().toString();
+    const dateObj = moment();
+    const date = dateObj.date().toString();
     const value = date[date.length - 1] === '1'
       ? 'st'
       : date[date.length - 1] === '2'
@@ -61,8 +68,12 @@ class TodoList extends Component {
     return date + value;
   };
 
+  /**
+   * Get Current Month
+   * ( January, February, March, April, May, June, July, August, September, October, November, December)
+   */
   getCurrentMonth = () => {
-    const dateObj = new Date();
+    const dateObj = moment();
 
     const monthNames = [
       'January',
@@ -78,7 +89,7 @@ class TodoList extends Component {
       'November',
       'December',
     ];
-    const month = monthNames[dateObj.getMonth()];
+    const month = monthNames[dateObj.month()];
 
     return month;
   };
