@@ -118,3 +118,29 @@
     margin-left: 4em !important;
   }
 }
+
+/* 버튼 */
+#Wrap .btn-orange {
+  margin: 0;
+  font-size: 0.8rem;
+  background-image: linear-gradient(
+    to right,
+    #fd746c 0%,
+    #ff9068 51%,
+    #fd746c 100%
+  );
+  background-size: 200% auto;
+  box-shadow: 0 2px 10px 0 rgba(31, 38, 135, 0.05) !important;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+.ui.inverted.button.active,
+.ui.inverted.button:focus,
+#Wrap .btn-orange:hover {
+  color: #fff;
+  text-decoration: none;
+  background-position: right center;
+}

@@ -1,8 +1,6 @@
 .todo-item {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  padding: 1.5rem 2rem;
+  display: block;
+  padding: 1.5rem 2rem !important;
   background: rgba(255, 255, 255, 0.34);
   border: 1px solid rgba(255, 255, 255, 0.18);
   -webkit-border-radius: 1rem;
@@ -15,6 +13,14 @@
 }
 .todo-item + .todo-item {
   margin-top: 1rem;
+}
+.todo-item > .column {
+  display: flex !important;
+  align-items: center;
+  padding: 0 !important;
+}
+.todo-item > .column + .column {
+  margin-top: 2rem !important;
 }
 
 /* checkbox */
@@ -50,7 +56,7 @@
 .ui.checkbox label:hover::before {
   border-color: #d4d4d5;
 }
-/* checked */
+/* checkbox checked */
 .ui.checkbox.checkbox-item.checked label {
   color: rgba(68, 68, 68, 0.5);
   text-decoration: line-through;
@@ -80,16 +86,15 @@
   color: #fff;
 }
 
-/* time text */
+/* date,time text */
 .todo-item .meta {
-  margin-right: 2rem;
   margin-left: auto;
   white-space: nowrap;
+  text-align: right;
 }
-
-/* buttons */
-.todo-item .ui.buttons > div {
-  position: relative;
+.todo-item .meta + .MuiFormControl-root * {
+  margin: 0;
+  padding: 0;
 }
 
 /* more 버튼 */
@@ -171,19 +176,72 @@
 }
 
 /* edit input */
-.ui.input.edit-input {
-  position: absolute;
-  min-width: 70%;
+.todo-item .edit-input {
+  overflow: hidden;
+  background: rgba(222, 210, 229, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  -webkit-border-radius: 500rem;
+  -moz-border-radius: 500rem;
+  -ms-border-radius: 500rem;
+  -o-border-radius: 500rem;
+  border-radius: 500rem;
+  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.15);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
 }
-.ui.input.edit-input.hide {
+.todo-item .edit-input.hide {
   z-index: -1;
   opacity: 0;
 }
 
-.ui.segment.todolist .todo-item .ui.input.edit-input > input {
-  background: rgba(222, 210, 229, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.15);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
+.todo-item .edit-input-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+.todo-item .edit-input-wrapper .edit-input {
+  display: inline-block;
+}
+.todo-item .edit-input-wrapper .edit-input + .edit-input {
+  margin-left: 0.4rem;
+}
+
+/* title edit input */
+.todo-item .edit-input.title {
+  position: absolute;
+  min-width: 70%;
+}
+
+/* date time edit input */
+.todo-item .MuiInputBase-root {
+  color: #444 !important;
+  font-size: 1em;
+  font-family: 'Fira Sans Extra Condensed', 'Noto Sans KR', sans-serif;
+  line-height: 1.21428571em;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  -webkit-border-radius: 500rem;
+  -moz-border-radius: 500rem;
+  -ms-border-radius: 500rem;
+  -o-border-radius: 500rem;
+  border-radius: 500rem;
+}
+.todo-item .MuiInputBase-root.Mui-focused {
+  box-shadow: 0 2px 10px 0 rgba(31, 38, 135, 0.25);
+}
+.todo-item .MuiInputBase-input {
+  height: auto;
+  padding-left: 1.5rem;
+}
+.todo-item .MuiOutlinedInput-notchedOutline {
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+.todo-item .MuiIconButton-root:hover {
+  background: transparent;
+}
+.todo-item .MuiSvgIcon-root path {
+  color: #444;
+  opacity: 0.7;
+}
+.todo-item .MuiInputBase-root fieldset {
+  display: none;
 }

@@ -9,7 +9,7 @@ interface Props {
   handleClose: any;
 }
 
-class ModalNoTime extends Component<Props> {
+class ModalNoDate extends Component<Props> {
   render() {
     const { modalOpen, handleClose } = this.props;
 
@@ -27,7 +27,7 @@ class ModalNoTime extends Component<Props> {
               size="huge"
               style={ { color: '#fa6768' } }
             />
-            <Header>시간을 설정해주세요!</Header>
+            <Header>날짜를 설정해주세요!</Header>
           </Modal.Content>
           <Modal.Actions style={ { textAlign: 'center' } }>
             <Button onClick={ handleClose }>OK</Button>
@@ -38,4 +38,4 @@ class ModalNoTime extends Component<Props> {
   }
 }
 
-export default ModalNoTime;
+export default ModalNoDate;

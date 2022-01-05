@@ -122,15 +122,17 @@ class TodoList extends Component {
             </Segment>
             <TodoForm />
             <Segment className="todolist">
-              { itemList.length > 0 ? (
-                itemList.map((data: ItemType, index: number) => (
-                  <TodoItem key={ data.index } index={ index } />
-                ))
-              ) : (
-                <div className="no-data">
-                  <span>아직 할일을 등록하지 않았어요 ◡̈</span>
-                </div>
-              ) }
+              <Grid style={ { margin: 0 } }>
+                { itemList.length > 0 ? (
+                  itemList.map((data: ItemType, index: number) => (
+                    <TodoItem key={ data.index } index={ index } />
+                  ))
+                ) : (
+                  <div className="no-data">
+                    <span>아직 할일을 등록하지 않았어요 ◡̈</span>
+                  </div>
+                ) }
+              </Grid>
             </Segment>
           </Segment.Group>
         </Container>

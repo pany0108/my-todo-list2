@@ -4,12 +4,14 @@ import {
 } from 'semantic-ui-react';
 import { observer } from 'mobx-react';
 import { TodoListStore } from '~/app/service';
-import { ModalNoContents, ModalNoTime } from './modal';
-import TimeSet from './TimeSet';
+import { ModalNoContents, ModalNoDate } from './modal';
+import NativePicker from './NativePicker';
 import '~/app/style/todoForm.css';
+import ModalNoTime from './modal/ModalNoTime';
 
 interface State {
   modalOpenNoContents: boolean;
+  modalOpenSetDate: boolean;
   modalOpenSetTime: boolean;
 }
 
@@ -17,6 +19,7 @@ interface State {
 class TodoForm extends Component {
   state:State = {
     modalOpenNoContents: false,
+    modalOpenSetDate: false,
     modalOpenSetTime: false,
   }
 
@@ -27,24 +30,23 @@ class TodoForm extends Component {
     if (TodoListStore.title === '') {
       this.setState({ modalOpenNoContents: true });
     }
-    // 할일 O , 시간 X
-    if (TodoListStore.title !== '' && TodoListStore.time === '') {
+    // 할일 O , 날짜 X
+    if (TodoListStore.title !== '' && TodoListStore.date === '') {
+      this.setState({ modalOpenSetDate: true });
+    }
+    // 할일 O, 날짜 O, 종일 X, 시간 X
+    if (TodoListStore.title !== '' && TodoListStore.date !== '' && !TodoListStore.allDay && TodoListStore.time === '') {
       this.setState({ modalOpenSetTime: true });
     }
-    // 할일 O, 시간 O
-    if (TodoListStore.title !== '' && TodoListStore.time !== '') {
+    // 할일 O, 날짜 O, 종일 O
+    if (TodoListStore.title !== '' && TodoListStore.date !== '' && TodoListStore.allDay) {
       TodoListStore.addItem(index);
-      TodoListStore.title = '';
-      TodoListStore.time = '';
-      TodoListStore.allDay = false;
+      TodoListStore.initItem();
     }
-    // 할일 O, 종일 O
-    if (TodoListStore.title !== '' && TodoListStore.allDay) {
-      this.setState({ modalOpenSetTime: false });
+    // 할일 O, 날짜 O, 시간 O
+    if (TodoListStore.title !== '' && TodoListStore.date !== '' && TodoListStore.time !== '') {
       TodoListStore.addItem(index);
-      TodoListStore.title = '';
-      TodoListStore.time = '';
-      TodoListStore.allDay = false;
+      TodoListStore.initItem();
     }
 
     // console.log('Item added');
@@ -61,7 +63,7 @@ class TodoForm extends Component {
   };
 
   render() {
-    const { modalOpenNoContents, modalOpenSetTime } = this.state;
+    const { modalOpenNoContents, modalOpenSetDate, modalOpenSetTime } = this.state;
     const { title, allDay } = TodoListStore;
 
     return (
@@ -90,7 +92,7 @@ class TodoForm extends Component {
                 width={ 16 }
                 style={ { display: 'flex', alignItems: 'center' } }
               >
-                <TimeSet />
+                <NativePicker />
                 <Checkbox
                   className="all-day"
                   label="종일"
@@ -102,7 +104,7 @@ class TodoForm extends Component {
                 />
 
                 <Button
-                  className="add-btn"
+                  className="btn-orange"
                   inverted
                   circular
                   onClick={ () => {
@@ -121,6 +123,12 @@ class TodoForm extends Component {
           modalOpen={ modalOpenNoContents }
           handleClose={ () => {
             this.setState({ modalOpenNoContents: false });
+          } }
+        />
+        <ModalNoDate
+          modalOpen={ modalOpenSetDate }
+          handleClose={ () => {
+            this.setState({ modalOpenSetDate: false });
           } }
         />
         <ModalNoTime

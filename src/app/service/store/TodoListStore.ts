@@ -1,11 +1,13 @@
-import { action, observable, toJS } from 'mobx';
+/* eslint-disable no-nested-ternary */
+import { action, observable } from 'mobx';
+import moment from 'moment';
 
 interface ItemType {
   index: number;
   title: string;
   checked: boolean;
+  date: any;
   time: any;
-  // allDay: boolean;
 }
 
 class TodoListStore {
@@ -17,6 +19,9 @@ class TodoListStore {
 
   @observable
   checked: boolean;
+
+  @observable
+  date: any;
 
   @observable
   time: any;
@@ -41,9 +46,18 @@ class TodoListStore {
     ];
     this.title = '';
     this.checked = false;
-    this.time = '';
-    this.allDay = false;
+    this.date = moment().format('MM/DD/yyyy');
+    this.time = moment().toLocaleString();
+    this.allDay = true;
   }
+
+  @action
+  initItem = () => {
+    this.title = '';
+    this.date = moment().format('MM/DD/yyyy');
+    this.time = moment().toLocaleString();
+    this.allDay = true;
+  };
 
   @action
   loadItem = () => {
@@ -51,14 +65,14 @@ class TodoListStore {
     if (result !== null) {
       this.itemList = JSON.parse(result!);
     }
-  }
+  };
 
   @action
   saveItem = () => {
     const result = this.itemList;
 
     window.localStorage.setItem('arr', JSON.stringify(result));
-  }
+  };
 
   @action
   addItem = (index: number) => {
@@ -66,6 +80,7 @@ class TodoListStore {
       index,
       title: this.title,
       checked: false,
+      date: this.date,
       time: this.allDay ? '' : this.time,
     });
 
@@ -73,28 +88,42 @@ class TodoListStore {
   };
 
   @action
-  deleteItem = (index:number) => {
+  deleteItem = (index: number) => {
     const result = this.itemList.filter((item: any) => item.index !== index);
 
     this.itemList = result;
-  }
+  };
 
   @action
   checkItem = (index: number) => {
     this.itemList[index].checked = !this.itemList[index].checked;
-  }
+  };
+
+  @action
+  getToday = (newDateValue: any) => {
+    // const year = newDateValue.getFullYear();
+    // let month = newDateValue.getMonth() + 1;
+    // let date = newDateValue.getDate();
+
+    // month = month < 10 ? `0${month}` : month;
+    // date = date < 10 ? `0${date}` : date;
+
+    // this.date = `${month}/${date}/${year}`;
+    this.date = moment(newDateValue).format('MM/DD/yyyy');
+  };
 
   @action
   getTime = (newTimeValue: any) => {
-    let hours = newTimeValue.getHours();
-    let minutes = newTimeValue.getMinutes();
-    const ampm = hours >= 12 ? 'pm' : 'am';
+    // let hours = newTimeValue.getHours();
+    // let minutes = newTimeValue.getMinutes();
+    // const ampm = hours >= 12 ? 'pm' : 'am';
 
-    hours %= 12;
-    hours = hours || 12;
-    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    // hours %= 12;
+    // hours = hours || 12;
+    // minutes = minutes < 10 ? `0${minutes}` : minutes;
 
-    this.time = `${hours}:${minutes} ${ampm}`;
+    // this.time = `${hours}:${minutes} ${ampm}`;
+    this.time = moment(newTimeValue).toLocaleString();
   };
 }
 

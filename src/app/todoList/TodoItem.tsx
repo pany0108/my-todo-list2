@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import {
-  Checkbox, Button, Input, Item,
+  Checkbox, Button, Input, Item, Grid,
 } from 'semantic-ui-react';
+import {
+  DesktopDatePicker, LocalizationProvider, TimePicker,
+} from '@mui/lab';
+import { TextField } from '@mui/material';
+import moment from 'moment';
 import { observer } from 'mobx-react';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { TodoListStore } from '~/app/service';
 import '~/app/style/todoItem.css';
 
@@ -37,6 +43,9 @@ class TodoItem extends Component<Props> {
     document.addEventListener('mousedown', this.initMoreBtn);
   }
 
+  componentDidUpdate() {
+  }
+
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.initMoreBtn);
   }
@@ -44,9 +53,9 @@ class TodoItem extends Component<Props> {
   checkItem = () => {
     const { index } = this.props;
 
-    // console.log('Item checked');
-
     TodoListStore.checkItem(TodoListStore.itemList[index].index);
+
+    // console.log('Item checked');
   };
 
   editItem = () => {
@@ -55,7 +64,7 @@ class TodoItem extends Component<Props> {
     // console.log('item edited');
   };
 
-  handleKeyPress = (e: any) => {
+  handleEditKeyPress = (e: any) => {
     if (e.key === 'Enter') {
       this.editItem();
     }
@@ -76,67 +85,132 @@ class TodoItem extends Component<Props> {
   render() {
     const { index } = this.props;
     const { itemList } = TodoListStore;
-    const { isMoreBtnClicked, isEditBtnClicked } = this.state;
+    const {
+      isMoreBtnClicked, isEditBtnClicked,
+    } = this.state;
 
     return (
       <>
-        <div
-          className={ `todo-item ${itemList[index].checked ? 'checked' : ''}` }
-        >
-          <Checkbox
-            className={ `checkbox-item ${isEditBtnClicked ? 'hide' : ''}` }
-            label={ itemList[index].title }
-            checked={ itemList[index].checked }
-            onClick={ this.checkItem }
-          />
-
-          <Input
-            className={ `edit-input action ${isEditBtnClicked ? '' : 'hide'}` }
-          >
-            <input
-              value={ itemList[index].title }
-              onChange={ (e: any) => {
-                itemList[index].title = e.target.value;
-              } }
-              onKeyPress={ this.handleKeyPress }
-              ref={ this.editRef }
+        <Grid.Row className={ `todo-item ${itemList[index].checked ? 'checked' : ''}` }>
+          <Grid.Column width={ 16 }>
+            <Checkbox
+              className={ `checkbox-item ${isEditBtnClicked ? 'hide' : ''}` }
+              label={ itemList[index].title }
+              checked={ itemList[index].checked }
+              onClick={ this.checkItem }
             />
-            <Button icon="check" onClick={ this.editItem } />
-          </Input>
 
-          <Item.Meta>{ itemList[index].time }</Item.Meta>
-          <div ref={ this.moreRef }>
-            <Button.Group>
-              <Button
-                className="more-btn"
-                icon="ellipsis horizontal"
-                compact
-                onClick={ () => {
-                  this.setState({ isMoreBtnClicked: !isMoreBtnClicked });
+            <Input
+              className={ `edit-input title action ${isEditBtnClicked ? '' : 'hide'}` }
+            >
+              <input
+                value={ itemList[index].title }
+                onChange={ (e: any) => {
+                  itemList[index].title = e.target.value;
                 } }
+                onKeyPress={ this.handleEditKeyPress }
+                ref={ this.editRef }
               />
+            </Input>
 
-              <Button
-                className={ `del-btn ${isMoreBtnClicked ? 'shown' : ''}` }
-                icon="trash alternate outline"
-                compact
-                onClick={ this.deleteItem }
-              />
-              <Button
-                className={ `edit-btn ${isMoreBtnClicked ? 'shown' : ''}` }
-                icon="edit"
-                compact
-                onClick={ () => {
-                  this.setState({
-                    isEditBtnClicked: true,
-                    isMoreBtnClicked: !isMoreBtnClicked,
-                  });
-                  this.editRef.current.focus();
-                } }
-              />
-            </Button.Group>
-          </div>
-        </div>
+            <Grid.Column style={ { margin: '-0.2rem 1rem -0.2rem auto' } }>
+              <Item.Meta>
+                { itemList[index].date }
+              </Item.Meta>
+
+              <Item.Meta>
+                { itemList[index].time === '' ? ''
+                  : moment(itemList[index].time).format('hh:mm a') }
+              </Item.Meta>
+            </Grid.Column>
+
+            <div ref={ this.moreRef }>
+              <Button.Group>
+                <Button
+                  className="more-btn"
+                  icon="ellipsis horizontal"
+                  compact
+                  onClick={ () => {
+                    this.setState({ isMoreBtnClicked: !isMoreBtnClicked });
+                  } }
+                />
+
+                <Button
+                  className={ `del-btn ${isMoreBtnClicked ? 'shown' : ''}` }
+                  icon="trash alternate outline"
+                  compact
+                  onClick={ this.deleteItem }
+                />
+                <Button
+                  className={ `edit-btn ${isMoreBtnClicked ? 'shown' : ''}` }
+                  icon="edit"
+                  compact
+                  onClick={ () => {
+                    this.setState({
+                      isEditBtnClicked: true,
+                      isMoreBtnClicked: !isMoreBtnClicked,
+                    });
+                    this.editRef.current.focus();
+                  } }
+                />
+              </Button.Group>
+            </div>
+          </Grid.Column>
+
+          { isEditBtnClicked
+            ? (
+              <Grid.Column width={ 16 }>
+                <div className="edit-input-wrapper">
+                  <LocalizationProvider dateAdapter={ AdapterDateFns }>
+                    <div className="edit-input">
+                      <DesktopDatePicker
+                        inputFormat="MM/dd/yyyy"
+                        value={ itemList[index].date }
+                        allowSameDateSelection
+                        onChange={ (newDateValue: any) => {
+                          itemList[index].date = moment(newDateValue).format('MM/DD/yyyy');
+                        } }
+                        PopperProps={ { placement: 'bottom' } }
+                        renderInput={ (params: any) => (
+                          <TextField
+                            { ...params }
+                            style={ { width: '150px' } }
+                          />
+                        ) }
+                      />
+                    </div>
+                    { itemList[index].time === '' ? ''
+                      : (
+                        <div className="edit-input">
+                          <TimePicker
+                            value={ itemList[index].time }
+                            onChange={ (newTimeValue: any) => {
+                              itemList[index].time = moment(newTimeValue).toLocaleString();
+                            } }
+                            renderInput={ (params: any) => (
+                              <TextField
+                                { ...params }
+                                style={ { width: '130px' } }
+                              />
+                            ) }
+                          />
+                        </div>
+                      ) }
+                  </LocalizationProvider>
+                </div>
+
+                <Button
+                  className="btn-orange btn-edit"
+                  inverted
+                  circular
+                  onClick={ this.editItem }
+                  style={ { padding: '0.7rem 3.2rem ', marginLeft: 'auto' } }
+                >Edit
+                </Button>
+              </Grid.Column>
+            )
+            : '' }
+        </Grid.Row>
       </>
     );
   }
