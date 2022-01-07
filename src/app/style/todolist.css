@@ -1,0 +1,7 @@
+.todolist .ui.grid > div {
+  width: 100%;
+}
+
+.todolist .ui.grid > div + div {
+  margin-top: 1rem;
+}

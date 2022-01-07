@@ -11,9 +11,6 @@
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
 }
-.todo-item + .todo-item {
-  margin-top: 1rem;
-}
 .todo-item > .column {
   display: flex !important;
   align-items: center;

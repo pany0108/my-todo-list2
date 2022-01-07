@@ -4,7 +4,7 @@ import moment from 'moment';
 
 interface ItemType {
   index: number;
-  id: number;
+  id: string;
   title: string;
   checked: boolean;
   date: any;
@@ -80,7 +80,7 @@ class TodoListStore {
   addItem = (index: number) => {
     const result = this.itemList.concat({
       index,
-      id: index,
+      id: index.toString(),
       title: this.title,
       checked: false,
       date: this.date,
@@ -104,30 +104,21 @@ class TodoListStore {
 
   @action
   getToday = (newDateValue: any) => {
-    // const year = newDateValue.getFullYear();
-    // let month = newDateValue.getMonth() + 1;
-    // let date = newDateValue.getDate();
-
-    // month = month < 10 ? `0${month}` : month;
-    // date = date < 10 ? `0${date}` : date;
-
-    // this.date = `${month}/${date}/${year}`;
     this.date = moment(newDateValue).format('MM/DD/yyyy');
   };
 
   @action
   getTime = (newTimeValue: any) => {
-    // let hours = newTimeValue.getHours();
-    // let minutes = newTimeValue.getMinutes();
-    // const ampm = hours >= 12 ? 'pm' : 'am';
-
-    // hours %= 12;
-    // hours = hours || 12;
-    // minutes = minutes < 10 ? `0${minutes}` : minutes;
-
-    // this.time = `${hours}:${minutes} ${ampm}`;
     this.time = moment(newTimeValue).toLocaleString();
   };
+
+  @action
+  reorder = (startIndex:number, endIndex:number) => {
+    const list = this.itemList;
+    const [removed] = list.splice(startIndex, 1);
+
+    list.splice(endIndex, 0, removed);
+  }
 }
 
 export default new TodoListStore();
