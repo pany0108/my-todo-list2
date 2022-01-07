@@ -132,14 +132,18 @@ class TodoItem extends Component<Props> {
             </Input>
 
             <Grid.Column style={ { margin: '-0.2rem 1rem -0.2rem auto' } }>
-              <Item.Meta>
-                { itemList[index].date }
+              <Item.Meta className="remaining-days">
+                { /* { itemList[index].date } */ }
+                { TodoListStore.remainingDays(index) }
               </Item.Meta>
 
-              <Item.Meta>
-                { itemList[index].time === '' ? ''
-                  : moment(itemList[index].time).format('hh:mm a') }
-              </Item.Meta>
+              { itemList[index].time === '' ? ''
+                : (
+                  <Item.Meta>
+                    { moment(itemList[index].time).format('hh:mm a') }
+                  </Item.Meta>
+                ) }
+
             </Grid.Column>
 
             <div ref={ this.moreRef }>

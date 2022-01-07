@@ -22,12 +22,22 @@ class TodoList extends Component {
       return null;
     }
 
-    TodoListStore.reorder(
+    const reorder = TodoListStore.reorder(
       result.source.index,
       result.destination.index,
     );
 
-    // console.log('drag ended');
+    return reorder;
+  }
+
+  getStyle=(style:any, snapshot:any) => {
+    if (!snapshot.isDropAnimating) {
+      return style;
+    }
+    return {
+      ...style,
+      transitionDuration: '0.001s',
+    };
   }
 
   render() {
@@ -44,20 +54,28 @@ class TodoList extends Component {
                   { ...provided.droppableProps }
                 >
                   <Grid style={ { margin: 0 } }>
-                    { itemList.map((data: ItemType, index: number) => (
-                      <Draggable key={ data.id } draggableId={ `item-${data.id}` } index={ index }>
-                        { (provided2) => (
-                          <div
-                            style={ provided2.draggableProps.style }
-                            ref={ provided2.innerRef }
-                            { ...provided2.draggableProps }
-                            { ...provided2.dragHandleProps }
-                          >
-                            <TodoItem key={ data.id } index={ index } />
-                          </div>
-                        ) }
-                      </Draggable>
-                    )) }
+                    { itemList.length > 0 ? (
+
+                      itemList.map((data: ItemType, index: number) => (
+                        <Draggable key={ data.id } draggableId={ `item-${data.id}` } index={ index }>
+                          { (provided2, snapshot) => (
+                            <div
+                              ref={ provided2.innerRef }
+                              { ...provided2.draggableProps }
+                              { ...provided2.dragHandleProps }
+                              style={ this.getStyle(provided2.draggableProps.style, snapshot) }
+                            >
+                              <TodoItem key={ data.id } index={ index } />
+                            </div>
+                          ) }
+                        </Draggable>
+                      ))
+
+                    ) : (
+                      <div className="no-data">
+                        <span>아직 할일을 등록하지 않았어요 ◡̈</span>
+                      </div>
+                    ) }
                     { provided.placeholder }
                   </Grid>
                 </div>

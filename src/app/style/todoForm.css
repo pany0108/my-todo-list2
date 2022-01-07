@@ -1,7 +1,10 @@
 /* form */
 .ui.segment.todolist-form {
-  padding: 2rem 0;
+  padding: 2rem 0 1rem;
   border: none;
+}
+.ui.segment.todolist-form .ui.grid > .row {
+  padding: 1rem;
 }
 
 .ui.segment.todolist-form .column + .column {

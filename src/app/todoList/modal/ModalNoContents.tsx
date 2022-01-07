@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Modal, Button, Header, Icon } from 'semantic-ui-react';
+import {
+  Modal, Button, Header, Icon,
+} from 'semantic-ui-react';
 import '~/app/style/modal.css';
 
 interface Props {
@@ -14,21 +16,21 @@ class ModalNoContents extends Component<Props> {
     return (
       <>
         <Modal
-          open={modalOpen}
-          closeOnDimmerClick={false}
-          onClose={handleClose}
+          open={ modalOpen }
+          closeOnDimmerClick={ false }
+          onClose={ handleClose }
           size="mini"
         >
-          <Modal.Content style={{ textAlign: 'center' }}>
+          <Modal.Content style={ { textAlign: 'center' } }>
             <Icon
               name="check circle outline"
               size="huge"
-              style={{ color: '#fa6768' }}
+              style={ { color: '#fa6768' } }
             />
             <Header>할 일을 입력해주세요!</Header>
           </Modal.Content>
-          <Modal.Actions style={{ textAlign: 'center' }}>
-            <Button onClick={handleClose}>OK</Button>
+          <Modal.Actions style={ { textAlign: 'center' } }>
+            <Button onClick={ handleClose }>OK</Button>
           </Modal.Actions>
         </Modal>
       </>

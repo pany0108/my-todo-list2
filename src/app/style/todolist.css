@@ -1,3 +1,10 @@
+.todolist {
+  max-height: calc(100vh - 8rem - 430px);
+  padding: 1rem 0 !important;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .todolist .ui.grid > div {
   width: 100%;
 }

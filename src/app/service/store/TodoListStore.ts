@@ -113,7 +113,22 @@ class TodoListStore {
   };
 
   @action
-  reorder = (startIndex:number, endIndex:number) => {
+  remainingDays=(index: number) => {
+    const today = moment();
+    const tomorrow = moment().add(1, 'days');
+    const eventday = moment(this.itemList[index].date);
+    const diff = eventday.diff(today, 'days');
+
+    if (today.date() === eventday.date()) return 'Today';
+    if (tomorrow.date() === eventday.date()) return 'Tomorrow';
+
+    const remain = `D${diff > 0 ? '+' : ''}${diff}`;
+
+    return remain;
+  }
+
+  @action
+  reorder = (startIndex: number, endIndex: number) => {
     const list = this.itemList;
     const [removed] = list.splice(startIndex, 1);
 

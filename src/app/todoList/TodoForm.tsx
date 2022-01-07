@@ -104,6 +104,7 @@ class TodoForm extends Component<Props> {
                     onClick: this.resetInput,
                   } }
                   placeholder="할 일을 입력해주세요"
+                  ref={ this.todoInputRef }
                 />
               </Grid.Column>
 
