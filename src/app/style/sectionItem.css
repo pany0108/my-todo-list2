@@ -1,0 +1,141 @@
+.section-item {
+  display: block;
+  padding: 0 !important;
+}
+.section-item + .section-item,
+.section-item + .add-section-wrapper {
+  margin-top: 1rem;
+}
+.section-item > .column {
+  display: flex !important;
+  align-items: center;
+  padding: 1.5rem 2rem !important;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px 0 rgba(31, 38, 135, 0.15);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+/*title hide */
+.section-item .section-title.hide {
+  display: none;
+}
+
+/* more 버튼 */
+.section-item .ui.button.more-btn {
+  padding-top: 0;
+  padding-bottom: 0;
+  background: none;
+  box-shadow: none !important;
+}
+.section-item .ui.button.more-btn:hover,
+.section-item .ui.button.more-btn:focus,
+.section-item .ui.button.more-btn:active {
+  background: none;
+  box-shadow: none !important;
+}
+
+/* delete 버튼 */
+.section-item .ui.button.del-btn {
+  position: absolute;
+  top: 50%;
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+  -webkit-transform: scale(0) translateX(0%);
+  -moz-transform: scale(0) translateX(0%);
+  -ms-transform: scale(0) translateX(0%);
+  -o-transform: scale(0) translateX(0%);
+  transform: scale(0) translateX(0%);
+  opacity: 0;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.section-item .ui.button.del-btn.shown {
+  -webkit-transform: scale(1) translateX(-110%) translateY(-50%);
+  -moz-transform: scale(1) translateX(-110%) translateY(-50%);
+  -ms-transform: scale(1) translateX(-110%) translateY(-50%);
+  -o-transform: scale(1) translateX(-110%) translateY(-50%);
+  transform: scale(1) translateX(-110%) translateY(-50%);
+  opacity: 1;
+}
+
+/* edit 버튼 */
+.section-item .ui.button.edit-btn {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+  -webkit-transform: scale(0) translateY(0%);
+  -moz-transform: scale(0) translateY(0%);
+  -ms-transform: scale(0) translateY(0%);
+  -o-transform: scale(0) translateY(0%);
+  transform: scale(0) translateY(0%);
+  opacity: 0;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.section-item .ui.button.edit-btn.shown {
+  -webkit-transform: scale(1) translateY(-140%);
+  -moz-transform: scale(1) translateY(-140%);
+  -ms-transform: scale(1) translateY(-140%);
+  -o-transform: scale(1) translateY(-140%);
+  transform: scale(1) translateY(-140%);
+  opacity: 1;
+}
+
+/* edit input */
+.section-item .edit-input.title {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  z-index: 0;
+  z-index: 1;
+  display: block;
+  max-width: 70%;
+  overflow: hidden;
+  background: rgba(222, 210, 229, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  -webkit-border-radius: 500rem;
+  -moz-border-radius: 500rem;
+  -ms-border-radius: 500rem;
+  -o-border-radius: 500rem;
+  border-radius: 500rem;
+  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.15);
+  transform: translateY(-50%);
+  opacity: 1;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.section-item .edit-input.title.hide {
+  z-index: -1;
+  opacity: 0;
+}
+.section-item .edit-input.title input {
+  width: 100%;
+  padding: 1rem 4rem 1rem 2rem;
+}

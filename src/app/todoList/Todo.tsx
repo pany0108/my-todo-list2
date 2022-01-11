@@ -9,7 +9,7 @@ import {
 import { observer } from 'mobx-react';
 import moment from 'moment';
 import { TodoListStore } from '~/app/service';
-import { TodoForm, TodoList } from '~/app/todoList';
+import { TodoForm, TodoList, Section } from '~/app/todoList';
 import '~/app/style/todo.css';
 
 @observer
@@ -94,6 +94,10 @@ class Todo extends Component {
     return (
       <>
         <Container>
+          <Segment.Group>
+            <Section />
+          </Segment.Group>
+
           <Segment.Group>
             <Segment className="todolist-header" padded>
               <Header textAlign="center" size="huge" inverted>

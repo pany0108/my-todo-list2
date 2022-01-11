@@ -18,6 +18,10 @@
   content: '';
 }
 .ui.container {
+  display: flex;
+}
+.ui.segments {
+  margin: 0;
   padding: 2rem 1.5rem;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -30,8 +34,10 @@
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
-.ui.segment,
-.ui.segments {
+.ui.segments + .ui.segments {
+  margin-left: 1.5rem;
+}
+.ui.segment {
   background: transparent;
   border: 0;
   box-shadow: none;

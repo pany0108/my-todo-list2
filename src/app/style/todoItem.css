@@ -1,5 +1,8 @@
 .todo-item {
+  position: relative;
   display: block;
+}
+.todo-item > div {
   padding: 1.5rem 2rem !important;
   background: rgba(255, 255, 255, 0.34);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -12,12 +15,12 @@
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
 }
-.todo-item > .column {
+.todo-item > div > .column {
   display: flex !important;
   align-items: center;
   padding: 0 !important;
 }
-.todo-item > .column + .column {
+.todo-item > div > .column + .column {
   margin-top: 2rem !important;
 }
 
@@ -194,7 +197,9 @@
 
 /* edit input */
 .todo-item .edit-input {
+  z-index: 1;
   display: block;
+  padding: 0 !important;
   overflow: hidden;
   background: rgba(222, 210, 229, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -204,11 +209,13 @@
   -o-border-radius: 500rem;
   border-radius: 500rem;
   box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.15);
+  opacity: 1;
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
 }
 .todo-item .edit-input.hide {
-  display: none;
+  z-index: -1;
+  opacity: 0;
 }
 .todo-item .edit-input input {
   width: 100%;
@@ -229,6 +236,8 @@
 /* title edit input */
 .todo-item .edit-input.title {
   position: absolute;
+  top: 5%;
+  left: 2rem;
   min-width: 70%;
 }
 

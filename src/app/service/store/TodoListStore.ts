@@ -62,18 +62,18 @@ class TodoListStore {
 
   @action
   loadItem = () => {
-    const result = window.localStorage.getItem('arr');
+    const itemList = window.localStorage.getItem('itemList');
 
-    if (result !== null) {
-      this.itemList = JSON.parse(result!);
+    if (itemList !== null) {
+      this.itemList = JSON.parse(itemList!);
     }
   };
 
   @action
   saveItem = () => {
-    const result = this.itemList;
+    const { itemList } = this;
 
-    window.localStorage.setItem('arr', JSON.stringify(result));
+    window.localStorage.setItem('itemList', JSON.stringify(itemList));
   };
 
   @action

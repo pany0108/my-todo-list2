@@ -1,0 +1,65 @@
+/* Add Section */
+.add-section-wrapper {
+  flex: 1;
+  padding: 0 !important;
+}
+.add-section-wrapper > .column {
+  display: flex !important;
+  align-items: center;
+  padding: 0.5rem 2rem !important;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px 0 rgba(31, 38, 135, 0.15);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+/* Add section button */
+.add-section-btn {
+  width: 100%;
+  padding: 1rem 0 !important;
+  background: transparent !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+.add-section-btn.hide {
+  opacity: 0;
+}
+
+.add-section-input {
+  position: absolute !important;
+  top: 50%;
+  z-index: 1;
+  width: 100%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  opacity: 1;
+}
+.add-section-input.hide {
+  z-index: -1;
+  opacity: 0;
+}
+.add-section-wrapper .ui.action.add-section-input input,
+.add-section-wrapper .ui.action.add-section-input input:focus {
+  background: transparent !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
