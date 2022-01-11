@@ -9,13 +9,13 @@ interface SectionType {
 
 class SectionStore {
   @observable
-  sectionList: Array<SectionType>;
+  sectionItemList: Array<SectionType>;
 
   @observable
   sectionTitle: string;
 
   constructor() {
-    this.sectionList = [
+    this.sectionItemList = [
       // { index: 1, id: '1', title: 'Work' },
       // { index: 2, id: '2', title: 'Home' },
     ];
@@ -24,18 +24,18 @@ class SectionStore {
 
   @action
   loadItem = () => {
-    const sectionList = window.localStorage.getItem('sectionList');
+    const sectionItemList = window.localStorage.getItem('SectionItemList');
 
-    if (sectionList !== null) {
-      this.sectionList = JSON.parse(sectionList!);
+    if (sectionItemList !== null) {
+      this.sectionItemList = JSON.parse(sectionItemList!);
     }
   };
 
   @action
   saveItem = () => {
-    const { sectionList } = this;
+    const { sectionItemList } = this;
 
-    window.localStorage.setItem('sectionList', JSON.stringify(sectionList));
+    window.localStorage.setItem('SectionItemList', JSON.stringify(sectionItemList));
   };
 
   @action
@@ -45,20 +45,20 @@ class SectionStore {
 
   @action
   addSection = (index:number) => {
-    const result = this.sectionList.concat({
+    const result = this.sectionItemList.concat({
       index,
       id: index.toString(),
       title: this.sectionTitle,
     });
 
-    this.sectionList = result;
+    this.sectionItemList = result;
   }
 
   @action
   deleteSection = (index: number) => {
-    const result = this.sectionList.filter((item: any) => item.index !== index);
+    const result = this.sectionItemList.filter((item: any) => item.index !== index);
 
-    this.sectionList = result;
+    this.sectionItemList = result;
   };
 }
 

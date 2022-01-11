@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import {
-  Container,
   Grid,
   Header,
   Segment,
@@ -9,7 +8,7 @@ import {
 import { observer } from 'mobx-react';
 import moment from 'moment';
 import { TodoListStore } from '~/app/service';
-import { TodoForm, TodoList, Section } from '~/app/todoList';
+import { TodoForm, TodoList } from '~/app/pages';
 import '~/app/style/todo.css';
 
 @observer
@@ -89,50 +88,46 @@ class Todo extends Component {
   };
 
   render() {
-    const { itemList } = TodoListStore;
+    const { todoItemList } = TodoListStore;
 
     return (
       <>
-        <Container>
-          <Segment.Group>
-            <Section />
-          </Segment.Group>
+        <Segment.Group>
+          <Segment className="todolist-header" padded>
+            <Header textAlign="center" size="huge" inverted>
+              Todo List
+            </Header>
+          </Segment>
+          <Segment
+            className="todolist-info"
+            textAlign="center"
+            size="massive"
+            padded
+          >
+            <Grid>
+              <Grid.Row>
+                <Grid.Column width={ 10 } textAlign="left">
+                  <div>
+                    <div className="day">{ this.getCurrentDay() }</div>
+                    <div className="date">{ this.getCurrentDate() }</div>
+                  </div>
+                  <div>
+                    <div className="month">{ this.getCurrentMonth() }</div>
+                  </div>
+                </Grid.Column>
+                <Grid.Column floated="right" width={ 6 } textAlign="right">
+                  <div className="tasks">
+                    <span className="task-cnt">{ todoItemList.length }</span> Tasks
+                  </div>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Segment>
 
-          <Segment.Group>
-            <Segment className="todolist-header" padded>
-              <Header textAlign="center" size="huge" inverted>
-                Todo List
-              </Header>
-            </Segment>
-            <Segment
-              className="todolist-info"
-              textAlign="center"
-              size="massive"
-              padded
-            >
-              <Grid>
-                <Grid.Row>
-                  <Grid.Column width={ 10 } textAlign="left">
-                    <div>
-                      <div className="day">{ this.getCurrentDay() }</div>
-                      <div className="date">{ this.getCurrentDate() }</div>
-                    </div>
-                    <div>
-                      <div className="month">{ this.getCurrentMonth() }</div>
-                    </div>
-                  </Grid.Column>
-                  <Grid.Column floated="right" width={ 6 } textAlign="right">
-                    <div className="tasks">
-                      <span className="task-cnt">{ itemList.length }</span> Tasks
-                    </div>
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
-            </Segment>
-            <TodoForm />
-            <TodoList />
-          </Segment.Group>
-        </Container>
+          <TodoForm />
+
+          <TodoList />
+        </Segment.Group>
       </>
     );
   }

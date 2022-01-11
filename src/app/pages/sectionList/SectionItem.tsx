@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, Grid, Input, Icon,
+  Button, Grid, Input,
 } from 'semantic-ui-react';
 import '~/app/style/sectionItem.css';
 import { observer } from 'mobx-react';
@@ -71,7 +71,7 @@ class SectionItem extends Component<Props> {
    deleteSection = () => {
      const { index } = this.props;
 
-     SectionStore.deleteSection(SectionStore.sectionList[index].index);
+     SectionStore.deleteSection(SectionStore.sectionItemList[index].index);
    };
 
    /**
@@ -85,7 +85,7 @@ class SectionItem extends Component<Props> {
 
    render() {
      const { index } = this.props;
-     const { sectionList } = SectionStore;
+     const { sectionItemList } = SectionStore;
      const {
        isMoreBtnClicked, isEditBtnClicked,
      } = this.state;
@@ -97,9 +97,9 @@ class SectionItem extends Component<Props> {
              className={ `edit-input title action ${isEditBtnClicked ? '' : 'hide'}` }
            >
              <input
-               value={ sectionList[index].title }
+               value={ sectionItemList[index].title }
                onChange={ (e: any) => {
-                 sectionList[index].title = e.target.value;
+                 sectionItemList[index].title = e.target.value;
                } }
                onKeyPress={ this.handleEditKeyPress }
                ref={ this.sectionEditRef }
@@ -109,7 +109,7 @@ class SectionItem extends Component<Props> {
 
            <Grid.Column width={ 16 }>
              <span className={ `section-title ${isEditBtnClicked ? 'hide' : ''}` }>
-               { sectionList[index].title }
+               { sectionItemList[index].title }
              </span>
 
              <div ref={ this.moreRef } style={ { marginLeft: 'auto' } }>

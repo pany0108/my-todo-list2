@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import {
   Segment, Grid, Button, Icon, Input,
 } from 'semantic-ui-react';
-import { SectionItem, ModalNoSectionName } from '~/app/todoList';
+import { SectionItem, ModalNoSectionName } from '~/app/pages';
 import { SectionStore } from '~/app/service';
 import '~/app/style/sectionList.css';
 
@@ -54,7 +54,7 @@ class SectionList extends Component {
    * Add Section to the List
    */
    addSection = () => {
-     const index = SectionStore.sectionList.length > 0 ? SectionStore.sectionList[SectionStore.sectionList.length - 1].index + 1 : 1;
+     const index = SectionStore.sectionItemList.length > 0 ? SectionStore.sectionItemList[SectionStore.sectionItemList.length - 1].index + 1 : 1;
 
      if (SectionStore.sectionTitle === '') {
        this.setState({ modalOpenNoSectionName: true });
@@ -85,7 +85,7 @@ class SectionList extends Component {
   };
 
   render() {
-    const { sectionList } = SectionStore;
+    const { sectionItemList } = SectionStore;
     const { isAddSectionBtnClicked, modalOpenNoSectionName } = this.state;
 
     return (
@@ -98,7 +98,7 @@ class SectionList extends Component {
               </Grid.Column>
             </Grid.Row>
 
-            { sectionList.map((data: SectionType, index: number) => (
+            { sectionItemList.map((data: SectionType, index: number) => (
               <SectionItem key={ data.id } index={ index } />
             )) }
 

@@ -27,10 +27,12 @@
   display: none;
 }
 
+.section-item .ui.buttons {
+  position: relative;
+}
 /* more 버튼 */
 .section-item .ui.button.more-btn {
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 0;
   background: none;
   box-shadow: none !important;
 }
@@ -67,17 +69,18 @@
   transition: all 0.2s ease;
 }
 .section-item .ui.button.del-btn.shown {
-  -webkit-transform: scale(1) translateX(-110%) translateY(-50%);
-  -moz-transform: scale(1) translateX(-110%) translateY(-50%);
-  -ms-transform: scale(1) translateX(-110%) translateY(-50%);
-  -o-transform: scale(1) translateX(-110%) translateY(-50%);
-  transform: scale(1) translateX(-110%) translateY(-50%);
+  -webkit-transform: scale(1) translateX(-130%) translateY(-50%);
+  -moz-transform: scale(1) translateX(-130%) translateY(-50%);
+  -ms-transform: scale(1) translateX(-130%) translateY(-50%);
+  -o-transform: scale(1) translateX(-130%) translateY(-50%);
+  transform: scale(1) translateX(-130%) translateY(-50%);
   opacity: 1;
 }
 
 /* edit 버튼 */
 .section-item .ui.button.edit-btn {
   position: absolute;
+  left: 50%;
   margin: 0;
   overflow: hidden;
   background: #fff;
@@ -100,11 +103,11 @@
   transition: all 0.2s ease;
 }
 .section-item .ui.button.edit-btn.shown {
-  -webkit-transform: scale(1) translateY(-140%);
-  -moz-transform: scale(1) translateY(-140%);
-  -ms-transform: scale(1) translateY(-140%);
-  -o-transform: scale(1) translateY(-140%);
-  transform: scale(1) translateY(-140%);
+  -webkit-transform: scale(1) translateY(-140%) translateX(-50%);
+  -moz-transform: scale(1) translateY(-140%) translateX(-50%);
+  -ms-transform: scale(1) translateY(-140%) translateX(-50%);
+  -o-transform: scale(1) translateY(-140%) translateX(-50%);
+  transform: scale(1) translateY(-140%) translateX(-50%);
   opacity: 1;
 }
 

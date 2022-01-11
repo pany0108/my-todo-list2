@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {
   Header, Segment,
 } from 'semantic-ui-react';
-import { SectionList } from '~/app/todoList';
-import '~/app/style/section.css';
+import { SectionList } from '~/app/pages';
 import { SectionStore } from '~/app/service';
+import '~/app/style/section.css';
 
 class Section extends Component {
   componentDidMount() {
@@ -22,13 +22,15 @@ class Section extends Component {
   render() {
     return (
       <>
-        <Segment>
-          <Header textAlign="center" inverted>
-            Section
-          </Header>
-        </Segment>
+        <Segment.Group>
+          <Segment>
+            <Header textAlign="center" inverted>
+              Section
+            </Header>
+          </Segment>
 
-        <SectionList />
+          <SectionList />
+        </Segment.Group>
       </>
     );
   }

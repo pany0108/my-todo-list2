@@ -34,7 +34,7 @@
   opacity: 0;
 }
 
-.add-section-input {
+.section-list .add-section-input {
   position: absolute !important;
   top: 50%;
   z-index: 1;
@@ -46,12 +46,12 @@
   transform: translateY(-50%);
   opacity: 1;
 }
-.add-section-input.hide {
+.section-list .add-section-input.hide {
   z-index: -1;
   opacity: 0;
 }
-.add-section-wrapper .ui.action.add-section-input input,
-.add-section-wrapper .ui.action.add-section-input input:focus {
+.section-list .add-section-wrapper .ui.action.add-section-input input,
+.section-list .add-section-wrapper .ui.action.add-section-input input:focus {
   background: transparent !important;
   border: 0 !important;
   outline: none !important;

@@ -13,7 +13,7 @@ interface ItemType {
 
 class TodoListStore {
   @observable
-  itemList: Array<ItemType>;
+  todoItemList: Array<ItemType>;
 
   @observable
   title: string;
@@ -31,7 +31,7 @@ class TodoListStore {
   allDay: boolean;
 
   constructor() {
-    this.itemList = [
+    this.todoItemList = [
       // {
       //   index: 0,
       //   title: '리액트 공부하기',
@@ -62,23 +62,23 @@ class TodoListStore {
 
   @action
   loadItem = () => {
-    const itemList = window.localStorage.getItem('itemList');
+    const todoItemList = window.localStorage.getItem('TodoItemList');
 
-    if (itemList !== null) {
-      this.itemList = JSON.parse(itemList!);
+    if (todoItemList !== null) {
+      this.todoItemList = JSON.parse(todoItemList!);
     }
   };
 
   @action
   saveItem = () => {
-    const { itemList } = this;
+    const { todoItemList } = this;
 
-    window.localStorage.setItem('itemList', JSON.stringify(itemList));
+    window.localStorage.setItem('TodoItemList', JSON.stringify(todoItemList));
   };
 
   @action
   addItem = (index: number) => {
-    const result = this.itemList.concat({
+    const result = this.todoItemList.concat({
       index,
       id: index.toString(),
       title: this.title,
@@ -87,19 +87,19 @@ class TodoListStore {
       time: this.allDay ? '' : this.time,
     });
 
-    this.itemList = result;
+    this.todoItemList = result;
   };
 
   @action
   deleteItem = (index: number) => {
-    const result = this.itemList.filter((item: any) => item.index !== index);
+    const result = this.todoItemList.filter((item: any) => item.index !== index);
 
-    this.itemList = result;
+    this.todoItemList = result;
   };
 
   @action
   checkItem = (index: number) => {
-    this.itemList[index].checked = !this.itemList[index].checked;
+    this.todoItemList[index].checked = !this.todoItemList[index].checked;
   };
 
   @action
@@ -116,8 +116,8 @@ class TodoListStore {
   remainingDays=(index: number) => {
     const today = moment();
     const tomorrow = moment().add(1, 'days');
-    const eventday = moment(this.itemList[index].date);
-    const diff = eventday.diff(today, 'days');
+    const eventday = moment(this.todoItemList[index].date);
+    const diff = eventday.diff(today, 'days') + 1;
 
     if (today.date() === eventday.date()) return 'Today';
     if (tomorrow.date() === eventday.date()) return 'Tomorrow';
@@ -128,8 +128,8 @@ class TodoListStore {
   }
 
   @action
-  reorder = (startIndex: number, endIndex: number) => {
-    const list = this.itemList;
+  reorderItem = (startIndex: number, endIndex: number) => {
+    const list = this.todoItemList;
     const [removed] = list.splice(startIndex, 1);
 
     list.splice(endIndex, 0, removed);

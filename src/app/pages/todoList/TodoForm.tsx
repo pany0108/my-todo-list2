@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import { TodoListStore } from '~/app/service';
 import {
   NativePicker, ModalNoTime, ModalNoContents, ModalNoDate,
-} from '~/app/todoList';
+} from '~/app/pages';
 import '~/app/style/todoForm.css';
 
 interface Props{}
@@ -37,7 +37,7 @@ class TodoForm extends Component<Props> {
    * Add Item to the List
    */
   addItem = () => {
-    const index = TodoListStore.itemList.length > 0 ? TodoListStore.itemList[TodoListStore.itemList.length - 1].index + 1 : 1;
+    const index = TodoListStore.todoItemList.length > 0 ? TodoListStore.todoItemList[TodoListStore.todoItemList.length - 1].index + 1 : 1;
 
     // 할일 X
     if (TodoListStore.title === '') {

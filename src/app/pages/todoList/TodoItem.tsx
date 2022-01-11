@@ -23,9 +23,9 @@ interface State {
 
 @observer
 class TodoItem extends Component<Props> {
-  private readonly moreRef: React.RefObject<any>;
+  private readonly moreBtnRef: React.RefObject<any>;
 
-  private readonly editRef: React.RefObject<any>;
+  private readonly editInputRef: React.RefObject<any>;
 
   state: State = {
     isMoreBtnClicked: false,
@@ -35,8 +35,8 @@ class TodoItem extends Component<Props> {
   constructor(props: Props) {
     super(props);
 
-    this.moreRef = React.createRef();
-    this.editRef = React.createRef();
+    this.moreBtnRef = React.createRef();
+    this.editInputRef = React.createRef();
   }
 
   componentDidMount() {
@@ -88,38 +88,38 @@ class TodoItem extends Component<Props> {
   deleteItem = () => {
     const { index } = this.props;
 
-    TodoListStore.deleteItem(TodoListStore.itemList[index].index);
+    TodoListStore.deleteItem(TodoListStore.todoItemList[index].index);
   };
 
   /**
    * Initialize More Button
    */
   initMoreBtn = (event: any) => {
-    if (!this.moreRef.current.contains(event.target)) {
+    if (!this.moreBtnRef.current.contains(event.target)) {
       this.setState({ isMoreBtnClicked: false });
     }
   };
 
   render() {
     const { index } = this.props;
-    const { itemList } = TodoListStore;
+    const { todoItemList } = TodoListStore;
     const {
       isMoreBtnClicked, isEditBtnClicked,
     } = this.state;
 
     return (
       <>
-        <Grid.Row className={ `todo-item ${itemList[index].checked ? 'checked' : ''}` }>
+        <Grid.Row className={ `todo-item ${todoItemList[index].checked ? 'checked' : ''}` }>
           <Input
             className={ `edit-input title action ${isEditBtnClicked ? '' : 'hide'}` }
           >
             <input
-              value={ itemList[index].title }
+              value={ todoItemList[index].title }
               onChange={ (e: any) => {
-                itemList[index].title = e.target.value;
+                todoItemList[index].title = e.target.value;
               } }
               onKeyPress={ this.handleEditKeyPress }
-              ref={ this.editRef }
+              ref={ this.editInputRef }
             />
           </Input>
 
@@ -127,27 +127,27 @@ class TodoItem extends Component<Props> {
             <Grid.Column width={ 16 }>
               <Checkbox
                 className={ `checkbox-item ${isEditBtnClicked ? 'hide' : ''}` }
-                label={ itemList[index].title }
-                checked={ itemList[index].checked }
+                label={ todoItemList[index].title }
+                checked={ todoItemList[index].checked }
                 onClick={ this.checkItem }
               />
 
               <Grid.Column style={ { margin: '-0.2rem 1rem -0.2rem auto' } }>
                 <Item.Meta className="remaining-days">
-                  { /* { itemList[index].date } */ }
+                  { /* { todoItemList[index].date } */ }
                   { TodoListStore.remainingDays(index) }
                 </Item.Meta>
 
-                { itemList[index].time === '' ? ''
+                { todoItemList[index].time === '' ? ''
                   : (
                     <Item.Meta>
-                      { moment(itemList[index].time).format('hh:mm a') }
+                      { moment(todoItemList[index].time).format('hh:mm a') }
                     </Item.Meta>
                   ) }
 
               </Grid.Column>
 
-              <div ref={ this.moreRef }>
+              <div ref={ this.moreBtnRef }>
                 <Button.Group>
                   <Button
                     className="more-btn"
@@ -173,7 +173,7 @@ class TodoItem extends Component<Props> {
                         isEditBtnClicked: true,
                         isMoreBtnClicked: !isMoreBtnClicked,
                       });
-                      this.editRef.current.focus();
+                      this.editInputRef.current.focus();
                     } }
                   />
                 </Button.Group>
@@ -188,10 +188,10 @@ class TodoItem extends Component<Props> {
                       <div className="edit-input">
                         <DesktopDatePicker
                           inputFormat="MM/dd/yyyy"
-                          value={ itemList[index].date }
+                          value={ todoItemList[index].date }
                           allowSameDateSelection
                           onChange={ (newDateValue: any) => {
-                            itemList[index].date = moment(newDateValue).format('MM/DD/yyyy');
+                            todoItemList[index].date = moment(newDateValue).format('MM/DD/yyyy');
                           } }
                           PopperProps={ { placement: 'bottom' } }
                           renderInput={ (params: any) => (
@@ -202,13 +202,13 @@ class TodoItem extends Component<Props> {
                           ) }
                         />
                       </div>
-                      { itemList[index].time === '' ? ''
+                      { todoItemList[index].time === '' ? ''
                         : (
                           <div className="edit-input">
                             <TimePicker
-                              value={ itemList[index].time }
+                              value={ todoItemList[index].time }
                               onChange={ (newTimeValue: any) => {
-                                itemList[index].time = moment(newTimeValue).toLocaleString();
+                                todoItemList[index].time = moment(newTimeValue).toLocaleString();
                               } }
                               renderInput={ (params: any) => (
                                 <TextField
