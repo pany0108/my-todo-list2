@@ -4,6 +4,7 @@ import {
   Grid,
   Header,
   Segment,
+  Container,
 } from 'semantic-ui-react';
 import { observer } from 'mobx-react';
 import moment from 'moment';
@@ -92,42 +93,44 @@ class Todo extends Component {
 
     return (
       <>
-        <Segment.Group>
-          <Segment className="todolist-header" padded>
-            <Header textAlign="center" size="huge" inverted>
-              Todo List
-            </Header>
-          </Segment>
-          <Segment
-            className="todolist-info"
-            textAlign="center"
-            size="massive"
-            padded
-          >
-            <Grid>
-              <Grid.Row>
-                <Grid.Column width={ 10 } textAlign="left">
-                  <div>
-                    <div className="day">{ this.getCurrentDay() }</div>
-                    <div className="date">{ this.getCurrentDate() }</div>
-                  </div>
-                  <div>
-                    <div className="month">{ this.getCurrentMonth() }</div>
-                  </div>
-                </Grid.Column>
-                <Grid.Column floated="right" width={ 6 } textAlign="right">
-                  <div className="tasks">
-                    <span className="task-cnt">{ todoItemList.length }</span> Tasks
-                  </div>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Segment>
+        <Container textAlign="center">
+          <Segment.Group>
+            <Segment className="todolist-header" padded>
+              <Header textAlign="center" size="huge" inverted>
+                Todo List
+              </Header>
+            </Segment>
+            <Segment
+              className="todolist-info"
+              textAlign="center"
+              size="massive"
+              padded
+            >
+              <Grid>
+                <Grid.Row>
+                  <Grid.Column width={ 10 } textAlign="left">
+                    <div>
+                      <div className="day">{ this.getCurrentDay() }</div>
+                      <div className="date">{ this.getCurrentDate() }</div>
+                    </div>
+                    <div>
+                      <div className="month">{ this.getCurrentMonth() }</div>
+                    </div>
+                  </Grid.Column>
+                  <Grid.Column floated="right" width={ 6 } textAlign="right">
+                    <div className="tasks">
+                      <span className="task-cnt">{ todoItemList.length }</span> Tasks
+                    </div>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </Segment>
 
-          <TodoForm />
+            <TodoForm />
 
-          <TodoList />
-        </Segment.Group>
+            <TodoList />
+          </Segment.Group>
+        </Container>
       </>
     );
   }
