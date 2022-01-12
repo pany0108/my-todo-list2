@@ -1,6 +1,8 @@
 #Wrap {
   min-height: 100vh;
+  max-height: 100vh;
   padding: 4rem 0;
+  overflow-y: hidden;
   color: #444;
   font-family: 'Fira Sans Extra Condensed', 'Noto Sans KR', sans-serif;
   background: linear-gradient(
@@ -21,6 +23,7 @@
   display: flex;
 }
 .ui.segments {
+  max-width: 670px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
   background: rgba(255, 255, 255, 0.1);

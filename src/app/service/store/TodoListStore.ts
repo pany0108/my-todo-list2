@@ -133,6 +133,11 @@ class TodoListStore {
     const [removed] = list.splice(startIndex, 1);
 
     list.splice(endIndex, 0, removed);
+
+    for (let i = 0; i < this.todoItemList.length; i++) {
+      this.todoItemList[i].index = this.todoItemList.indexOf(this.todoItemList[i]);
+      this.todoItemList[i].id = this.todoItemList.indexOf(this.todoItemList[i]).toString();
+    }
   }
 }
 

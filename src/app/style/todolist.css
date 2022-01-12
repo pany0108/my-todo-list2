@@ -6,6 +6,7 @@
 }
 
 .todolist .ui.grid > div {
+  left: 0 !important;
   width: 100%;
 }
 

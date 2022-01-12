@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import { Segment, Grid } from 'semantic-ui-react';
 import { observer } from 'mobx-react';
@@ -53,7 +54,7 @@ class TodoList extends Component {
       <>
         <DragDropContext onDragEnd={ this.onDragEnd }>
           <Segment className="todolist">
-            <Droppable droppableId="droppable">
+            <Droppable droppableId="todos">
               { (provided) => (
                 <div
                   ref={ provided.innerRef }
@@ -61,22 +62,20 @@ class TodoList extends Component {
                 >
                   <Grid style={ { margin: 0 } }>
                     { todoItemList.length > 0 ? (
-
                       todoItemList.map((data: ItemType, index: number) => (
                         <Draggable key={ data.id } draggableId={ `item-${data.id}` } index={ index }>
-                          { (provided2, snapshot) => (
+                          { (provided, snapshot) => (
                             <div
-                              ref={ provided2.innerRef }
-                              { ...provided2.draggableProps }
-                              { ...provided2.dragHandleProps }
-                              style={ this.getStyle(provided2.draggableProps.style, snapshot) }
+                              ref={ provided.innerRef }
+                              { ...provided.draggableProps }
+                              { ...provided.dragHandleProps }
+                              style={ this.getStyle(provided.draggableProps.style, snapshot) }
                             >
-                              <TodoItem key={ data.id } index={ index } />
+                              <TodoItem index={ index } />
                             </div>
                           ) }
                         </Draggable>
                       ))
-
                     ) : (
                       <div className="no-data">
                         <span>아직 할일을 등록하지 않았어요 ◡̈</span>
