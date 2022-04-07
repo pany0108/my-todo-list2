@@ -25,8 +25,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: PROJECT_CONFIGMAP
-      imagePullSecrets:
-        - name: nuri-registry
 
 ---
 apiVersion: v1
